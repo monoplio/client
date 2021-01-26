@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 const JoinPage = props => {
-    return (
+  return (
       <div>Join Page</div>
-    );
-};
+  )
+}
 
-export { JoinPage };
-    
+export { JoinPage }

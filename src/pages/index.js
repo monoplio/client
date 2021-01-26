@@ -1,2 +1,2 @@
-export { JoinPage } from "./JoinPage";
-export { GamePage } from "./GamePage";
+export { JoinPage } from './JoinPage'
+export { GamePage } from './GamePage'

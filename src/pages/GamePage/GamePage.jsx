@@ -1,24 +1,25 @@
-import React from 'react';
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { ActionCableConsumer } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider'
 
 const GamePage = props => {
-    let { id } = useParams();
+  const { id } = useParams()
 
-    const handleReceivedData = response => {
-        console.log(response);
-    };
+  const handleReceivedData = response => {
+    console.log(response)
+  }
 
-    return (
+  return (
       <div>
           <ActionCableConsumer
             channel={{ channel: 'GameChannel', game_id: 1 }}
             onReceived={handleReceivedData}
            />
-          <div>Game {id}</div>
-      </div>
-    );
-};
+          <div>Game {id}
 
-export { GamePage };
-    
+          </div>
+      </div>
+  )
+}
+
+export { GamePage }

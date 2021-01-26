@@ -1,1 +1,1 @@
-export { JoinPage } from "./JoinPage";
+export { JoinPage } from './JoinPage'

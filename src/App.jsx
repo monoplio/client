@@ -1,12 +1,13 @@
-import { JoinPage, GamePage } from "./pages"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ActionCableProvider } from 'react-actioncable-provider';
-import './App.css';
+import React from 'react'
+import { JoinPage, GamePage } from './pages'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ActionCableProvider } from 'react-actioncable-provider'
+import './App.css'
 
-function App() {
+function App () {
   return (
     <div className="App">
-      <ActionCableProvider url={"ws://localhost:3000/cable"}>
+      <ActionCableProvider url={'ws://localhost:3000/cable'}>
         <Router>
           <Switch>
             <Route path="/game/:id">
@@ -19,7 +20,7 @@ function App() {
         </Router>
       </ActionCableProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
