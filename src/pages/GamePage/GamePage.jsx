@@ -1,23 +1,31 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { ActionCableConsumer } from 'react-actioncable-provider'
+import { useQuery, useSubscription } from '@apollo/client'
+import { GAMES, TEST } from '../../data'
 
 const GamePage = props => {
   const { id } = useParams()
+  const { loading, data } = useQuery(GAMES)
 
-  const handleReceivedData = response => {
-    console.log(response)
+  const handleReceivedData = ({ subscriptionData: { data } }) => {
+    console.log(data)
   }
+
+  const { data: testData, loading: testLoading } = useSubscription(TEST,
+    { onSubscriptionData: handleReceivedData }
+  )
 
   return (
       <div>
-          <ActionCableConsumer
-            channel={{ channel: 'GameChannel', game_id: 1 }}
-            onReceived={handleReceivedData}
-           />
-          <div>Game {id}
+          <div>Game {id}</div>
+          { !loading &&
+            <div>{data.games[0].id}</div>
+          }
 
-          </div>
+          {
+             !testLoading &&
+             <div>Test: {testData.id}</div>
+          }
       </div>
   )
 }
