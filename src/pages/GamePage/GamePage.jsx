@@ -12,7 +12,12 @@ const GamePage = props => {
   }
 
   const { data: testData, loading: testLoading } = useSubscription(TEST,
-    { onSubscriptionData: handleReceivedData }
+    {
+      variables: {
+        gameId: id
+      },
+      onSubscriptionData: handleReceivedData
+    }
   )
 
   return (

@@ -1,9 +1,12 @@
 import { gql } from '@apollo/client'
 
 const TEST = gql`
-    subscription{
-        test {
+    subscription($gameId: ID!){
+        gameEvents(gameId: $gameId){
+        data{
             id
+        }
+        message
         }
     }
 `
