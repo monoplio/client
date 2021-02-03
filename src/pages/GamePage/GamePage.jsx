@@ -31,6 +31,98 @@ const GamePage = props => {
              !testLoading &&
              <div>Test: {testData.id}</div>
           }
+          <div className="board" style={{ transform: 'rotate(180deg)' }}>
+            <div className="horizontal-row">
+              <div className="corner"></div>
+              <div className="row" style={{ transform: 'rotate(180deg)' }}>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+              </div>
+              <div className="corner"></div>
+            </div>
+            <div className="middle-row">
+              <div className="vertical-row">
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+              </div>
+              <div className="vertical-row">
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+                  <div className="vertical-tile"></div>
+              </div>
+            </div>
+            <div className="horizontal-row">
+              <div className="corner"></div>
+              <div className="row">
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+                <div className="horizontal-tile">
+                  <div className="property-color"></div>
+                </div>
+              </div>
+              <div className="corner"></div>
+            </div>
+          </div>
       </div>
   )
 }
