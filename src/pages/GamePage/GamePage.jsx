@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
-import { useJoinGameMutation, useStartGameMutation, GAME, TEST } from '../../data'
+import { useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, GAME, TEST } from '../../data'
 import { Board } from '../../components'
 
 const GamePage = props => {
@@ -41,6 +41,18 @@ const GamePage = props => {
   const [startGame] = useStartGameMutation({
     variables: {
       gameId: id
+    }
+  })
+
+  const [rollDice] = useRollDiceMutation({
+    variables: {
+      playerId: props.user ? props.user.id : -1
+    }
+  })
+
+  const [endTurn] = useEndTurnMutation({
+    variables: {
+      playerId: props.user ? props.user.id : -1
     }
   })
 
@@ -105,14 +117,22 @@ const GamePage = props => {
               { game.players.map(player => (
                 <>
                   { props.user && (player.id === props.user.id)
-                    ? <div key={player.id}> {player.username} (you)</div>
-                    : <div key={player.id}> {player.username}</div>
+                    ? <div key={player.id}> {player.id === game.currentPlayer.id ? '->' : ''} {player.username} (you)</div>
+                    : <div key={player.id}> {player.id === game.currentPlayer.id ? '->' : ''} {player.username}</div>
                   }
                 </>
               ))
               }
             </div>
             <Board game={game}/>
+            { props.user && game.currentPlayer.id === props.user.id &&
+              <>
+              { game.currentPlayer.canRoll
+                ? <input className="menu-button" type="button" value="Roll" onClick={rollDice}/>
+                : <input className="menu-button" type="button" value="End" onClick={endTurn}/>
+              }
+              </>
+            }
           </>
         }
       </div>

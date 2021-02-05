@@ -5,6 +5,12 @@ import { PropertyHeader } from '../../components'
 const Tile = props => {
   return (
     <div className="horizontal-tile" key={props.key}>
+        <div className="horizontal-tile-players">
+            { props.tile.currentPlayers.map(player => (
+                <div className="horizontal-tile-player" key={'player-' + player.id}></div>
+            ))
+            }
+        </div>
         { props.tile.boardTileType === 'ActionTile' &&
             <div>{props.tile.boardTile.name}</div>
         }

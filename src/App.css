@@ -19,6 +19,16 @@ body{
     text-align: center;
 }
 
+.corner-tile-players{
+    position: absolute;
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
 .horizontal-row{
     display:flex;
 }
@@ -29,6 +39,9 @@ body{
     background-color: white;
     border: 1px solid black;
     text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .row{
@@ -60,6 +73,23 @@ body{
     width: 20px;
     height: 15px;
     background-color: #dd2828;
+}
+
+.horizontal-tile-players{
+    position: absolute;
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 76px;
+    height: 100px;
+}
+
+.horizontal-tile-player{
+    width: 15px;
+    height: 15px;
+    border-radius: 1em;
+    background-color: #000000;
 }
 
 .middle-row {

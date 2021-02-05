@@ -1,3 +1,5 @@
 export { useCreateGameMutation, CREATE_GAME } from './CreateGame.mutation.jsx'
+export { useEndTurnMutation, END_TURN } from './EndTurn.mutation.jsx'
 export { useJoinGameMutation, JOIN_GAME } from './JoinGame.mutation.jsx'
+export { useRollDiceMutation, ROLL_DICE } from './RollDice.mutation.jsx'
 export { useStartGameMutation, START_GAME } from './StartGame.mutation.jsx'
