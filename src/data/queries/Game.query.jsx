@@ -8,6 +8,11 @@ const GAME = gql`
             houseAvailable
             id
             players {
+                id
+                username
+            }
+            owner {
+                id
                 username
             }
             state
