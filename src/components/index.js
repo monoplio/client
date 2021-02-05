@@ -1,0 +1,5 @@
+export { Board } from './Board'
+export { CornerTile } from './CornerTile'
+export { PropertyHeader } from './PropertyHeader'
+export { Tile } from './Tile'
+export { TileRow } from './TileRow'
