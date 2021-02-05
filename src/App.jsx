@@ -39,7 +39,7 @@ function App () {
       <Router>
         <Switch>
           <Route path="/game/:id" >
-            <GamePage user={user}/>
+            <GamePage user={user} setUser={setUser}/>
           </Route>
           <Route exact path="/">
             <JoinPage setUser={setUser}/>
