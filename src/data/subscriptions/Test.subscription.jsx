@@ -15,20 +15,27 @@ const TEST = gql`
                 tiles {
                 boardTile{
                     ... on ActionTile {
+                        id
                         name
                     }
                     ... on Property {
+                        id
                         name
                         price
                         mortgage
                         stage
                         state
                         housePrice
+                        propertySet{
+                            color
+                        }
                     }
                     ... on Deck {
+                        id
                         name
                     }
                     ... on Utility {
+                        id
                         name
                         price
                     }
