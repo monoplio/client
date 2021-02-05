@@ -10,7 +10,6 @@ const JoinPage = props => {
 
   const redirectLocation = data => {
     props.setUser(data.createGame.owner)
-    console.log(data)
     setRedirect(data.createGame.id)
   }
 
@@ -35,7 +34,6 @@ const JoinPage = props => {
   const handleInputChange = function (e) {
     switch (e.target.name) {
       case 'username':
-        console.log(username)
         setUsername(e.target.value)
         break
     }
