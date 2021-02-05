@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { JoinPage, GamePage } from './pages'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client'
@@ -32,15 +32,17 @@ const client = new ApolloClient({
 })
 
 function App () {
+  const [user, setUser] = useState(null)
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route path="/game/:id">
-            <GamePage/>
+          <Route path="/game/:id" >
+            <GamePage user={user}/>
           </Route>
           <Route exact path="/">
-            <JoinPage/>
+            <JoinPage setUser={setUser}/>
           </Route>
         </Switch>
       </Router>
