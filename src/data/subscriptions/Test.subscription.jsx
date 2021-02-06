@@ -16,6 +16,11 @@ const TEST = gql`
                     id
                     username
                 }
+                currentPlayer{
+                    id
+                    username
+                    canRoll
+                }
                 state
                 tiles {
                 boardTile{
@@ -46,6 +51,9 @@ const TEST = gql`
                     }
                 }
                 boardTileType
+                currentPlayers{
+                    id
+                }
                 x
                 y
                 }
