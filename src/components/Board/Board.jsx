@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { CornerTile, TileRow } from '../../components'
+import { CornerTile, TileRow, Dice } from '../../components'
 
 const Board = props => {
   return (
@@ -14,7 +14,12 @@ const Board = props => {
             <div className="column">
                 <TileRow style={{ transform: 'rotate(90deg)' }} tiles={props.game.tiles.slice(11, 20).reverse()}/>
             </div>
-            <h1>Monopl.io</h1>
+            <div>
+                <h1>Monopl.io</h1>
+                { props.message && props.message === 'RollDice' &&
+                  <Dice dice={props.game.currentPlayer}/>
+                }
+            </div>
             <div className="column">
                 <TileRow style={{ transform: 'rotate(270deg)' }} tiles={props.game.tiles.slice(31, 40).reverse()}/>
             </div>

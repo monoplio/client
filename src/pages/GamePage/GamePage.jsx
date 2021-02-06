@@ -21,7 +21,7 @@ const GamePage = props => {
     }
   })
 
-  const {} = useSubscription(TEST, // data: testData, loading: testLoading
+  const { data: subscriptionData } = useSubscription(TEST, // data: testData, loading: testLoading
     {
       variables: {
         gameId: id
@@ -124,7 +124,8 @@ const GamePage = props => {
               ))
               }
             </div>
-            <Board game={game}/>
+            {console.log(subscriptionData)}
+            <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null}/>
             { props.user && game.currentPlayer.id === props.user.id &&
               <>
               { game.currentPlayer.canRoll
