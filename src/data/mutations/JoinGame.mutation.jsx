@@ -6,7 +6,8 @@ const JOIN_GAME = gql`
       balance
       id
       isPlaying
-      lastRoll
+      lastRoll1
+      lastRoll2
       username
       x
       y
