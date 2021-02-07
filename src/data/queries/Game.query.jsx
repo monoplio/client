@@ -19,6 +19,8 @@ const GAME = gql`
                 id
                 username
                 canRoll
+                lastRoll1
+                lastRoll2
             }
             state
             tiles {
