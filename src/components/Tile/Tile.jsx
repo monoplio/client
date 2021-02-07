@@ -7,7 +7,7 @@ const Tile = props => {
     <div className="horizontal-tile" key={props.key}>
         <div className="horizontal-tile-players">
             { props.tile.currentPlayers.map(player => (
-                <div className="horizontal-tile-player" key={'player-' + player.id}></div>
+                <div className="horizontal-tile-player" key={'player-' + player.id} style={{ backgroundColor: player.color }}></div>
             ))
             }
         </div>

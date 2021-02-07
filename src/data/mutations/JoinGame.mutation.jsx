@@ -8,6 +8,7 @@ const JOIN_GAME = gql`
       isPlaying
       lastRoll1
       lastRoll2
+      color
       username
       x
       y
