@@ -6,7 +6,7 @@ const CornerTile = props => {
     <div className="corner">
         <div className="corner-tile-players">
             { props.tile.currentPlayers.map(player => (
-                <div className="horizontal-tile-player" key={'player-' + player.id}></div>
+                <div className="horizontal-tile-player" key={'player-' + player.id} style={{ backgroundColor: player.color }} onClick={() => console.log(player)}></div>
             ))
             }
         </div>

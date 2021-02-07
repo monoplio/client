@@ -7,6 +7,7 @@ const CREATE_GAME = gql`
         owner {
             id
             username
+            color
             game {
                 id
             }

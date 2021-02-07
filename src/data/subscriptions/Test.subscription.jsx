@@ -55,6 +55,7 @@ const TEST = gql`
                 boardTileType
                 currentPlayers{
                     id
+                    color
                 }
                 x
                 y
