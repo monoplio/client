@@ -10,6 +10,8 @@ const GAME = gql`
             players {
                 id
                 username
+                color
+                balance
             }
             owner {
                 id
@@ -21,6 +23,39 @@ const GAME = gql`
                 canRoll
                 lastRoll1
                 lastRoll2
+                tile {
+                    boardTile{
+                        ... on ActionTile {
+                            id
+                            name
+                        }
+                        ... on Property {
+                            id
+                            name
+                            price
+                            mortgage
+                            stage
+                            state
+                            housePrice
+                            propertySet{
+                                color
+                            }
+                            player{
+                                id
+                            }
+                        }
+                        ... on Deck {
+                            id
+                            name
+                        }
+                        ... on Utility {
+                            id
+                            name
+                            price
+                        }
+                    }
+                    boardTileType
+                }
             }
             state
             tiles {
@@ -38,6 +73,9 @@ const GAME = gql`
                     state
                     housePrice
                     propertySet{
+                        color
+                    }
+                    player{
                         color
                     }
                 }

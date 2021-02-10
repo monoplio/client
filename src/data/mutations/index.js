@@ -1,3 +1,4 @@
+export { useBuyPropertyMutation, BUY_PROPERTY } from './BuyProperty.mutation.jsx'
 export { useCreateGameMutation, CREATE_GAME } from './CreateGame.mutation.jsx'
 export { useEndTurnMutation, END_TURN } from './EndTurn.mutation.jsx'
 export { useJoinGameMutation, JOIN_GAME } from './JoinGame.mutation.jsx'

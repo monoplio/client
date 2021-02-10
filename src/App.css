@@ -5,6 +5,33 @@ body{
     padding:0;
 }
 
+.game-display{
+    display:flex;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+}
+
+.player-card{
+    width: 170px;
+    height: 75px;
+    display:flex;
+    flex-direction: column;
+    padding: 1em;
+    font-size: 32px;
+    border-radius: 0.2em;
+
+}
+
+.options{
+    min-width: 300px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .board{
     width: 900px;
     height: 900PX;
