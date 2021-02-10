@@ -20,6 +20,9 @@ const Tile = props => {
                 <PropertyHeader color={props.tile.boardTile.propertySet.color} stage={props.tile.boardTile.stage}/>
                 <div>{props.tile.boardTile.name}</div>
                 <div>${props.tile.boardTile.price}</div>
+                { props.tile.boardTile.player !== null &&
+                    <div style={{ backgroundColor: props.tile.boardTile.player.color, height: '5px' }}></div>
+                }
             </>
         }
 

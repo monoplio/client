@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
-import { useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, GAME, TEST } from '../../data'
+import { useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, GAME, TEST } from '../../data'
 import { Board } from '../../components'
 
 const GamePage = props => {
@@ -33,6 +33,13 @@ const GamePage = props => {
   const setUser = data => {
     props.setUser(data.joinGame)
   }
+
+  const [buyProperty] = useBuyPropertyMutation({
+    variables: {
+      playerId: props.user ? props.user.id : -1,
+      propertyId: (game && game.currentPlayer) ? game.currentPlayer.tile.boardTile.id : -1
+    }
+  })
 
   const [joinGame] = useJoinGameMutation({
     onCompleted: setUser
@@ -79,7 +86,9 @@ const GamePage = props => {
 
   useEffect(() => {
     if (!loading) {
-      setGame(data.game)
+      if (game === null) {
+        setGame(data.game)
+      }
     }
   }, [data])
 
@@ -112,29 +121,33 @@ const GamePage = props => {
             </div>
         }
         { (!loading && game && game.state !== 'pending') &&
-          <>
-            <div>
+          <div className="game-display">
+            <div className="options">
               { game.players.map(player => (
                 <>
-                  { props.user && (player.id === props.user.id)
-                    ? <div key={player.id}> {player.id === game.currentPlayer.id ? '->' : ''} {player.username} (you)</div>
-                    : <div key={player.id}> {player.id === game.currentPlayer.id ? '->' : ''} {player.username}</div>
-                  }
+                  <div className="player-card" style={{ backgroundColor: player.color }}>
+                    <div>{player.id === game.currentPlayer.id ? '->' : ''} {player.username} { props.user && (player.id === props.user.id) ? '(you)' : ''}</div>
+                    <div>${player.balance} </div>
+                  </div>
                 </>
               ))
               }
             </div>
-            {console.log(subscriptionData)}
             <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null}/>
-            { props.user && game.currentPlayer.id === props.user.id &&
-              <>
-              { game.currentPlayer.canRoll
-                ? <input className="menu-button" type="button" value="Roll" onClick={rollDice}/>
-                : <input className="menu-button" type="button" value="End" onClick={endTurn}/>
+            <div className="options">
+              { props.user && game.currentPlayer.id === props.user.id &&
+                <>
+                { game.currentPlayer.tile.boardTileType === 'Property' && game.currentPlayer.tile.boardTile.player === null &&
+                  <input className="menu-button" type="button" value="Buy Property" onClick={buyProperty}/>
+                }
+                { game.currentPlayer.canRoll
+                  ? <input className="menu-button" type="button" value="Roll" onClick={rollDice}/>
+                  : <input className="menu-button" type="button" value="End" onClick={endTurn}/>
+                }
+                </>
               }
-              </>
-            }
-          </>
+            </div>
+          </div>
         }
       </div>
   )

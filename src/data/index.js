@@ -1,4 +1,5 @@
 export {
+  useBuyPropertyMutation, BUY_PROPERTY,
   useCreateGameMutation, CREATE_GAME,
   useEndTurnMutation, END_TURN,
   useJoinGameMutation, JOIN_GAME,
