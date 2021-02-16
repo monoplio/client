@@ -7,12 +7,12 @@ const Board = props => {
     <div className="board">
         <div className="horizontal-row">
             <CornerTile tile={props.game.tiles[20]}/>
-            <TileRow style={{ transform: 'rotate(180deg)' }} tiles={props.game.tiles.slice(21, 30).reverse()} />
+            <TileRow style={{ transform: 'rotate(180deg)' }} tiles={props.game.tiles.slice(21, 30).reverse()} setSelectedTile={props.setSelectedTile}/>
             <CornerTile tile={props.game.tiles[30]}/>
         </div>
         <div className="middle-row">
             <div className="column">
-                <TileRow style={{ transform: 'rotate(90deg)' }} tiles={props.game.tiles.slice(11, 20).reverse()}/>
+                <TileRow style={{ transform: 'rotate(90deg)' }} tiles={props.game.tiles.slice(11, 20).reverse()} setSelectedTile={props.setSelectedTile}/>
             </div>
             <div>
                 <h1>Monopl.io</h1>
@@ -21,12 +21,12 @@ const Board = props => {
                 }
             </div>
             <div className="column">
-                <TileRow style={{ transform: 'rotate(270deg)' }} tiles={props.game.tiles.slice(31, 40).reverse()}/>
+                <TileRow style={{ transform: 'rotate(270deg)' }} tiles={props.game.tiles.slice(31, 40).reverse()} setSelectedTile={props.setSelectedTile}/>
             </div>
         </div>
         <div className="horizontal-row">
             <CornerTile tile={props.game.tiles[10]}/>
-            <TileRow tiles={props.game.tiles.slice(1, 10).reverse()}/>
+            <TileRow tiles={props.game.tiles.slice(1, 10).reverse()} setSelectedTile={props.setSelectedTile}/>
             <CornerTile tile={props.game.tiles[0]}/>
         </div>
   </div>

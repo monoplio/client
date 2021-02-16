@@ -6,5 +6,5 @@ export {
   useRollDiceMutation, ROLL_DICE,
   useStartGameMutation, START_GAME
 } from './mutations'
-export { GAME, GAMES } from './queries'
+export { GAME, GAMES, TILE } from './queries'
 export { TEST } from './subscriptions'
