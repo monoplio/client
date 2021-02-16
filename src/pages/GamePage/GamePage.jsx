@@ -167,7 +167,7 @@ const GamePage = props => {
               }
               { props.user && game && game.currentPlayer.id === props.user.id &&
                 <>
-                { (selectedTile !== null && !tileQueryLoading && tileQueryData.tile.boardTileType === 'Property' && game.currentPlayer.id === tileQueryData.tile.boardTile.player.id) &&
+                { (selectedTile !== null && !tileQueryLoading && tileQueryData && tileQueryData.tile.boardTileType === 'Property' && tileQueryData.tile.boardTile.player !== null && game.currentPlayer.id === tileQueryData.tile.boardTile.player.id) &&
                   <>
                     {
                       tileQueryData.tile.boardTile.state !== 'mortgaged'
