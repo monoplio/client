@@ -24,6 +24,7 @@ const GAME = gql`
                 lastRoll1
                 lastRoll2
                 tile {
+                    id
                     boardTile{
                         ... on ActionTile {
                             id
@@ -59,6 +60,7 @@ const GAME = gql`
             }
             state
             tiles {
+            id
             boardTile{
                 ... on ActionTile {
                     id

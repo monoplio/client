@@ -4,12 +4,13 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
 import { useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, GAME, TEST } from '../../data'
-import { Board } from '../../components'
+import { Board, PropertyDetailed } from '../../components'
 
 const GamePage = props => {
   const { id } = useParams()
   const [game, setGame] = useState(null)
   const [username, setUsername] = useState()
+  const [selectedTile, setSelectedTile] = useState(null)
 
   const handleReceivedData = ({ subscriptionData: { data } }) => {
     setGame(data.gameEvents.data)
@@ -32,6 +33,10 @@ const GamePage = props => {
 
   const setUser = data => {
     props.setUser(data.joinGame)
+  }
+
+  const clearProperty = data => {
+    setSelectedTile(null)
   }
 
   const [buyProperty] = useBuyPropertyMutation({
@@ -58,6 +63,7 @@ const GamePage = props => {
   })
 
   const [endTurn] = useEndTurnMutation({
+    onCompleted: clearProperty,
     variables: {
       playerId: props.user ? props.user.id : -1
     }
@@ -133,8 +139,13 @@ const GamePage = props => {
               ))
               }
             </div>
-            <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null}/>
+            <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null} setSelectedTile={setSelectedTile}/>
             <div className="options">
+              {selectedTile !== null &&
+              <>
+                <PropertyDetailed selectedTile={selectedTile}/>
+              </>
+              }
               { props.user && game.currentPlayer.id === props.user.id &&
                 <>
                 { game.currentPlayer.tile.boardTileType === 'Property' && game.currentPlayer.tile.boardTile.player === null &&

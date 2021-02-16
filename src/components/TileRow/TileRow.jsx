@@ -6,7 +6,7 @@ const TileRow = props => {
   return (
     <div className="row" style={props.style}>
         { props.tiles.map(tile => (
-            <Tile key={tile.id} tile={tile}/>
+            <Tile key={tile.id} tile={tile} setSelectedTile={props.setSelectedTile}/>
         ))
         }
     </div>
