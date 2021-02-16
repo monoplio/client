@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
-import { useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, GAME, TEST } from '../../data'
+import { useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, useMortgagePropertyMutation, useUnmortgagePropertyMutation, GAME, TEST, TILE } from '../../data'
 import { Board, PropertyDetailed } from '../../components'
 
 const GamePage = props => {
@@ -39,6 +39,13 @@ const GamePage = props => {
     setSelectedTile(null)
   }
 
+  const { loading: tileQueryLoading, data: tileQueryData } = useQuery(TILE, {
+    skip: selectedTile === null,
+    variables: {
+      id: selectedTile
+    }
+  })
+
   const [buyProperty] = useBuyPropertyMutation({
     variables: {
       playerId: props.user ? props.user.id : -1,
@@ -66,6 +73,18 @@ const GamePage = props => {
     onCompleted: clearProperty,
     variables: {
       playerId: props.user ? props.user.id : -1
+    }
+  })
+
+  const [mortgageProperty] = useMortgagePropertyMutation({
+    variables: {
+      propertyId: tileQueryData ? parseInt(tileQueryData.tile.boardTile.id) : -1
+    }
+  })
+
+  const [unmortgageProperty] = useUnmortgagePropertyMutation({
+    variables: {
+      propertyId: tileQueryData ? parseInt(tileQueryData.tile.boardTile.id) : -1
     }
   })
 
@@ -141,13 +160,22 @@ const GamePage = props => {
             </div>
             <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null} setSelectedTile={setSelectedTile}/>
             <div className="options">
-              {selectedTile !== null &&
+              {(selectedTile !== null && !tileQueryLoading) &&
               <>
-                <PropertyDetailed selectedTile={selectedTile}/>
+                <PropertyDetailed tile={tileQueryData.tile} />
               </>
               }
-              { props.user && game.currentPlayer.id === props.user.id &&
+              { props.user && game && game.currentPlayer.id === props.user.id &&
                 <>
+                { (selectedTile !== null && !tileQueryLoading && tileQueryData.tile.boardTileType === 'Property' && game.currentPlayer.id === tileQueryData.tile.boardTile.player.id) &&
+                  <>
+                    {
+                      tileQueryData.tile.boardTile.state !== 'mortgaged'
+                        ? <input className="menu-button" type="button" value="Mortgage" onClick={mortgageProperty}/>
+                        : <input className="menu-button" type="button" value="Un Mortgage" onClick={unmortgageProperty}/>
+                    }
+                  </>
+                }
                 { game.currentPlayer.tile.boardTileType === 'Property' && game.currentPlayer.tile.boardTile.player === null &&
                   <input className="menu-button" type="button" value="Buy Property" onClick={buyProperty}/>
                 }
