@@ -39,13 +39,8 @@ const GamePage = props => {
     setSelectedTile(null)
   }
 
-  const printData = data => {
-    console.log(data)
-  }
-
   const { loading: tileQueryLoading, data: tileQueryData } = useQuery(TILE, {
     skip: selectedTile === null,
-    onCompleted: printData,
     variables: {
       id: selectedTile
     }
