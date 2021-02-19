@@ -23,6 +23,7 @@ const GAME = gql`
                 canRoll
                 lastRoll1
                 lastRoll2
+                balance
                 tile {
                     id
                     boardTile{

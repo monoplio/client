@@ -16,6 +16,8 @@ const TILE = gql`
                     stage
                     state
                     housePrice
+                    canBuyHouse
+                    canSellHouse
                     propertyRents{
                         stage
                         rent
