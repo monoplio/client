@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
-import { useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useStartGameMutation, useRollDiceMutation, useMortgagePropertyMutation, useUnmortgagePropertyMutation, GAME, TEST, TILE } from '../../data'
+import { useBuyHouseMutation, useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useSellHouseMutation, useStartGameMutation, useRejoinGameMutation, useRollDiceMutation, useMortgagePropertyMutation, useUnmortgagePropertyMutation, GAME, TEST, TILE } from '../../data'
 import { Board, PropertyDetailed } from '../../components'
 
 const GamePage = props => {
@@ -35,8 +35,16 @@ const GamePage = props => {
     props.setUser(data.joinGame)
   }
 
+  const setUserAfterRejoin = data => {
+    props.setUser(data.rejoinGame)
+  }
+
   const clearProperty = data => {
     setSelectedTile(null)
+  }
+
+  const resetSelectedTile = data => {
+    setSelectedTile(selectedTile)
   }
 
   const { loading: tileQueryLoading, data: tileQueryData } = useQuery(TILE, {
@@ -53,8 +61,28 @@ const GamePage = props => {
     }
   })
 
+  const [buyHouse] = useBuyHouseMutation({
+    onCompleted: resetSelectedTile,
+    variables: {
+      playerId: props.user ? props.user.id : -1,
+      propertyId: (!tileQueryLoading && tileQueryData && tileQueryData.tile) ? tileQueryData.tile.boardTile.id : -1
+    }
+  })
+
+  const [sellHouse] = useSellHouseMutation({
+    onCompleted: resetSelectedTile,
+    variables: {
+      playerId: props.user ? props.user.id : -1,
+      propertyId: (!tileQueryLoading && tileQueryData && tileQueryData.tile) ? tileQueryData.tile.boardTile.id : -1
+    }
+  })
+
   const [joinGame] = useJoinGameMutation({
     onCompleted: setUser
+  })
+
+  const [rejoinGame] = useRejoinGameMutation({
+    onCompleted: setUserAfterRejoin
   })
 
   const [startGame] = useStartGameMutation({
@@ -150,7 +178,7 @@ const GamePage = props => {
             <div className="options">
               { game.players.map(player => (
                 <>
-                  <div className="player-card" style={{ backgroundColor: player.color }}>
+                  <div className="player-card" style={{ backgroundColor: player.color }} onClick={() => rejoinGame({ variables: { username: player.username, gameId: game.id } })}>
                     <div>{player.id === game.currentPlayer.id ? '->' : ''} {player.username} { props.user && (player.id === props.user.id) ? '(you)' : ''}</div>
                     <div>${player.balance} </div>
                   </div>
@@ -169,6 +197,14 @@ const GamePage = props => {
                 <>
                 { (selectedTile !== null && !tileQueryLoading && tileQueryData && tileQueryData.tile.boardTileType === 'Property' && tileQueryData.tile.boardTile.player !== null && game.currentPlayer.id === tileQueryData.tile.boardTile.player.id) &&
                   <>
+                    {
+                      (tileQueryData.tile.boardTile.canBuyHouse === true && tileQueryData.tile.boardTile.stage < 5 && game.currentPlayer.balance >= tileQueryData.tile.boardTile.housePrice) &&
+                        <input className="menu-button" type="button" value="Buy House" onClick={buyHouse}/>
+                    }
+                    {
+                      (tileQueryData.tile.boardTile.canSellHouse === true && tileQueryData.tile.boardTile.stage > 0) &&
+                        <input className="menu-button" type="button" value="Sell House" onClick={sellHouse}/>
+                    }
                     {
                       tileQueryData.tile.boardTile.state !== 'mortgaged'
                         ? <input className="menu-button" type="button" value="Mortgage" onClick={mortgageProperty}/>

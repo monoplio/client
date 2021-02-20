@@ -24,6 +24,7 @@ const TEST = gql`
                     canRoll
                     lastRoll1
                     lastRoll2
+                    balance
                     tile {
                         id
                         boardTile{
