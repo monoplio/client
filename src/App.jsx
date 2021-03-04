@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { JoinPage, GamePage } from './pages'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client'
 import { ActionCableLink } from 'graphql-ruby-client'
 import { getMainDefinition } from '@apollo/client/utilities'
