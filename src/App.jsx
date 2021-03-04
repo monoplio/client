@@ -36,7 +36,7 @@ function App () {
 
   return (
     <ApolloProvider client={client}>
-      <Router basename="/client">
+      <Router>
         <Switch>
           <Route path="/game/:id" >
             <GamePage user={user} setUser={setUser}/>
