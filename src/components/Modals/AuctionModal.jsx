@@ -1,8 +1,18 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { TILE } from '../../data'
+import { PropertyDetailed } from '../../components'
 
 function AuctionModal (props) {
   const [amount, setAmount] = useState('')
+
+  const { loading: tileQueryLoading, data: tileQueryData } = useQuery(TILE, {
+    variables: {
+      id: props.tileId
+    }
+  })
+
   const handleInputChange = (e) => {
     setAmount(e.target.value)
     props.setBid(e.target.value)
@@ -22,6 +32,12 @@ function AuctionModal (props) {
             <label className="modal-bg" htmlFor="modal-1"></label>
             <div className="modal-inner">
                 <div className="modal-body">
+                    {(!tileQueryLoading && tileQueryData) &&
+                      <>
+                        <PropertyDetailed tile={tileQueryData.tile} />
+                        <div style={{ marginBottom: '2em' }}></div>
+                      </>
+                    }
                     <h2>Highest Bid: ${props.highest}</h2>
                     {
                         (!props.bal || props.bal > props.highest)

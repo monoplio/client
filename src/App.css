@@ -22,6 +22,7 @@ body {
     padding: 1em;
     font-size: 32px;
     border-radius: 0.2em;
+    margin:0.75em;
 }
 
 .options {
@@ -36,6 +37,7 @@ body {
     width: 900px;
     height: 900px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    background-color: #fcfcfc;
 }
 
 .corner {
@@ -150,16 +152,19 @@ body {
 /*----*/
 
 .join-page {
+
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: contain;
-    background-size: cover;
-    /*background-image: url("https://cdn.shopify.com/s/files/1/1918/9937/products/monopoly-money-stack-hasbro-fabric-camelot-fabrics.jpg?v=1610215258");*/
+    background: gray url(https://subtlepatterns.com/patterns/geometry2.png) repeat 0 0;
+    animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
 }
 
 .game-page {
@@ -172,21 +177,34 @@ body {
     background-position: 50%;
     background-size: contain;
     background-size: cover;
+    background: gray url(https://subtlepatterns.com/patterns/geometry2.png) repeat 0 0;
+    animation: slide 20s linear infinite;
     /*background-image: url("https://cdn.shopify.com/s/files/1/1918/9937/products/monopoly-money-stack-hasbro-fabric-camelot-fabrics.jpg?v=1610215258");*/
 }
 
+.center-board{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .menu {
-    background-color: white;
+    background-color: #fcfcfc;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     margin: 2em;
-    padding: 1em;
+    padding: 3em;
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 400px;
+    max-height: fit-content;
 }
 
 .menu-button {
-    background-color: #4caf50; /* Green */
+    background-color: #313131; /* Green */
     border: none;
     color: white;
     padding: 0.75em 3em;
@@ -195,28 +213,30 @@ body {
     display: inline-block;
     font-size: 16px;
     margin: 0.5em;
+    min-width: 150px;
+    border-radius: 4px;
 }
 
 .menu-button:hover {
-    background-color: rgb(89, 207, 92);
+    background-color: rgb(80, 80, 80);
 }
 
 .menu-title {
     font-size: 24px;
-    margin-top: 1em;
-    color: #4caf50;
+    /*margin-top: 1em;*/
+    color: #555555;
     text-decoration: none;
 }
 
 .menu-subtitle {
     font-size: 12px;
     margin: 1em;
-    color: #4caf50;
+    color: #555555;
     text-decoration: none;
 }
 
 .menu-input {
-    border: 1px solid #4caf50;
+    border: 1px solid #555555;
     padding: 0.75em 0.75em;
     text-align: center;
     text-decoration: none;
@@ -232,6 +252,7 @@ body {
     padding: 0.75em;
     min-width: 175px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    background-color: white;
 }
 
 .property-detailed-header {
@@ -259,7 +280,7 @@ body {
     display: flex;
     font-size: 4em;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .dice {
@@ -334,7 +355,9 @@ body {
     background: #fff;
     border-radius: 5px;
     padding: 1em 2em;
-    height: 25%;
+    height: fit-content;
+    /*min-height: 25%;
+    max-height: fit-content;*/
 }
 
 .modal-body {

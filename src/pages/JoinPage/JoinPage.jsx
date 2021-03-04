@@ -45,10 +45,12 @@ const JoinPage = props => {
         <div className="menu">
           { formStatus === 'initial' &&
             <>
-              <div className="menu-title">Monopl.io</div>
+              <div className="menu-title"><img src="https://i.imgur.com/1XwqRQP.png" width="300px"></img></div>
               {/* <div className="menu-subtitle">~100 players online</div>
               <input className="menu-button" type="button" value="Find Game"/> */}
               <input className="menu-button" type="button" value="Create Lobby" onClick={() => setFormStatus('creating')}/>
+              <a className="menu-button" href="https://github.com/monoplio">Github</a>
+              <p style={ { fontSize: '10px', marginTop: '3em' } }>© Justin Chang & Matthew MacRae-Bovell</p>
             </>
           }
 
