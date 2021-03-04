@@ -9,10 +9,10 @@ import ActionCable from 'actioncable'
 import './App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql' // https://floating-reef-26790.herokuapp.com/graphql
+  uri: 'http://floating-reef-26790.herokuapp.com/graphql' // https://floating-reef-26790.herokuapp.com/graphql
 })
 
-const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+const cable = ActionCable.createConsumer('ws://floating-reef-26790.herokuapp.com:/cable')
 
 const splitLink = split(
   ({ query }) => {
