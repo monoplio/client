@@ -14,8 +14,8 @@ const Board = props => {
             <div className="column">
                 <TileRow style={{ transform: 'rotate(90deg)' }} tiles={props.game.tiles.slice(11, 20).reverse()} setSelectedTile={props.setSelectedTile}/>
             </div>
-            <div>
-                <h1>Monopl.io</h1>
+            <div className="center-board">
+                <img src="https://i.imgur.com/1XwqRQP.png" width="300px"></img>
                 { props.message && props.message === 'RollDice' &&
                   <Dice dice={props.game.currentPlayer}/>
                 }

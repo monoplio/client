@@ -171,6 +171,7 @@ const GamePage = props => {
       <div className="game-page">
         { (!loading && game && game.state === 'pending') &&
           <div className="menu">
+              <img src="https://i.imgur.com/1XwqRQP.png" width="300px"></img>
               <div className="menu-title">Game {id}</div>
               <div className="menu-subtitle">~ Awaiting players...</div>
               <div className="menu-players">
@@ -211,7 +212,7 @@ const GamePage = props => {
             <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null} setSelectedTile={setSelectedTile}/>
             {
               (game.state === 'auction')
-                ? <AuctionModal game={game} user={props.user} bids={game.auctions[0].bids} bal={props.user.balance} highest={Math.max.apply(Math, game.auctions[0].bids.map((o) => { return o.amount }))} setBid={setBidAmount} increase={increaseBid} end={endBid}/>
+                ? <AuctionModal game={game} user={props.user} bids={game.auctions[0].bids} bal={props.user.balance} highest={Math.max.apply(Math, game.auctions[0].bids.map((o) => { return o.amount }))} setBid={setBidAmount} increase={increaseBid} end={endBid} tileId={game.currentPlayer.tile.id}/>
                 : null
             }
             <div className="options">
@@ -240,7 +241,7 @@ const GamePage = props => {
                   </>
                 }
                 { game.currentPlayer.tile.boardTileType === 'Property' && game.currentPlayer.tile.boardTile.player === null &&
-                  <BuyAuctionModal buy={buyProperty} auction={auctionProperty}/>
+                  <BuyAuctionModal buy={buyProperty} auction={auctionProperty} tileId={game.currentPlayer.tile.id}/>
                 }
                 { game.currentPlayer.canRoll
                   ? <input className="menu-button" type="button" value="Roll" onClick={rollDice}/>

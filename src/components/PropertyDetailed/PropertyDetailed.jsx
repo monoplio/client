@@ -4,7 +4,7 @@ import React from 'react'
 const PropertyDetailed = props => {
   return (
         <>
-            {props.tile.boardTileType === 'Property' &&
+            {(props.tile.boardTileType === 'Property' && props.tile.boardTile.propertySet.color !== 'black') &&
                 <div className="property-detailed">
                     <div className="property-detailed-header" style={{ backgroundColor: props.tile.boardTile.propertySet.color }}>
                         {props.tile.boardTile.name}

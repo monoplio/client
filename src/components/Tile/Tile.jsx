@@ -4,7 +4,7 @@ import { PropertyHeader } from '../../components'
 
 const Tile = props => {
   return (
-    <div className="horizontal-tile" key={props.key} onClick={() => props.setSelectedTile(props.tile.id)} style={{ backgroundColor: (props.tile.boardTileType === 'Property' ? (props.tile.boardTile.state === 'mortgaged' ? 'gray' : 'white') : ' white') }}>
+    <div className="horizontal-tile" key={props.key} onClick={() => props.setSelectedTile(props.tile.id)} style={{ backgroundColor: (props.tile.boardTileType === 'Property' ? (props.tile.boardTile.state === 'mortgaged' ? 'lightgray' : 'white') : ' white') }}>
         <div className="horizontal-tile-players">
             { props.tile.currentPlayers.map(player => (
                 <div className="horizontal-tile-player" key={'player-' + player.id} style={{ backgroundColor: player.color }}></div>

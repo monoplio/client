@@ -9,7 +9,7 @@ import ActionCable from 'actioncable'
 import './App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql'
+  uri: 'http://localhost:3000/graphql' // https://floating-reef-26790.herokuapp.com/graphql
 })
 
 const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
