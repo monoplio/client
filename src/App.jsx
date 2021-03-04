@@ -12,7 +12,7 @@ const httpLink = new HttpLink({
   uri: 'https://floating-reef-26790.herokuapp.com/graphql' // https://floating-reef-26790.herokuapp.com/graphql
 })
 
-const cable = ActionCable.createConsumer('ws://floating-reef-26790.herokuapp.com:/cable')
+const cable = ActionCable.createConsumer('wss://floating-reef-26790.herokuapp.com:/cable')
 
 const splitLink = split(
   ({ query }) => {
