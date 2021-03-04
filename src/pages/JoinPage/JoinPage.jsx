@@ -46,8 +46,8 @@ const JoinPage = props => {
           { formStatus === 'initial' &&
             <>
               <div className="menu-title">Monopl.io</div>
-              <div className="menu-subtitle">~100 players online</div>
-              <input className="menu-button" type="button" value="Find Game"/>
+              {/* <div className="menu-subtitle">~100 players online</div>
+              <input className="menu-button" type="button" value="Find Game"/> */}
               <input className="menu-button" type="button" value="Create Lobby" onClick={() => setFormStatus('creating')}/>
             </>
           }

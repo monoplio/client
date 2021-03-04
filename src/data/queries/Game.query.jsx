@@ -3,6 +3,12 @@ import { gql } from '@apollo/client'
 const GAME = gql`   
     query($id: ID!){
         game(id: $id){
+            auctions {
+                bids {
+                    amount
+                }
+                id
+            }
             height
             hotelAvailable
             houseAvailable
