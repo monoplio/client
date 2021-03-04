@@ -4,6 +4,12 @@ const TEST = gql`
     subscription{
         gameEvents{
             data{
+                auctions {
+                    bids {
+                        amount
+                    }
+                    id
+                }
                 height
                 hotelAvailable
                 houseAvailable

@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useSubscription } from '@apollo/client'
-import { useBuyHouseMutation, useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useSellHouseMutation, useStartGameMutation, useRejoinGameMutation, useRollDiceMutation, useMortgagePropertyMutation, useUnmortgagePropertyMutation, GAME, TEST, TILE } from '../../data'
-import { Board, PropertyDetailed } from '../../components'
+import { useEndBidMutation, useIncreaseBidMutation, useCreateAuctionMutation, useBuyHouseMutation, useBuyPropertyMutation, useEndTurnMutation, useJoinGameMutation, useSellHouseMutation, useStartGameMutation, useRejoinGameMutation, useRollDiceMutation, useMortgagePropertyMutation, useUnmortgagePropertyMutation, GAME, TEST, TILE } from '../../data'
+import { Board, PropertyDetailed, BuyAuctionModal, AuctionModal } from '../../components'
 
 const GamePage = props => {
   const { id } = useParams()
   const [game, setGame] = useState(null)
   const [username, setUsername] = useState()
   const [selectedTile, setSelectedTile] = useState(null)
+  const [bidAmount, setBidAmount] = useState(0)
 
   const handleReceivedData = ({ subscriptionData: { data } }) => {
     setGame(data.gameEvents.data)
@@ -51,6 +52,27 @@ const GamePage = props => {
     skip: selectedTile === null,
     variables: {
       id: selectedTile
+    }
+  })
+
+  const [increaseBid] = useIncreaseBidMutation({
+    variables: {
+      playerId: props.user ? props.user.id : -1,
+      auctionId: game && game.auctions && game.auctions[0] ? game.auctions[0].id : -1,
+      bidAmount: parseInt(bidAmount)
+    }
+  })
+
+  const [endBid] = useEndBidMutation({
+    variables: {
+      playerId: props.user ? props.user.id : -1,
+      auctionId: game && game.auctions && game.auctions[0] ? game.auctions[0].id : -1
+    }
+  })
+
+  const [auctionProperty] = useCreateAuctionMutation({
+    variables: {
+      propertyId: (game && game.currentPlayer) ? game.currentPlayer.tile.boardTile.id : -1
     }
   })
 
@@ -187,6 +209,11 @@ const GamePage = props => {
               }
             </div>
             <Board game={game} message={ subscriptionData ? subscriptionData.gameEvents.message : null} setSelectedTile={setSelectedTile}/>
+            {
+              (game.state === 'auction')
+                ? <AuctionModal game={game} user={props.user} bids={game.auctions[0].bids} bal={props.user.balance} highest={Math.max.apply(Math, game.auctions[0].bids.map((o) => { return o.amount }))} setBid={setBidAmount} increase={increaseBid} end={endBid}/>
+                : null
+            }
             <div className="options">
               {(selectedTile !== null && !tileQueryLoading) &&
               <>
@@ -213,7 +240,7 @@ const GamePage = props => {
                   </>
                 }
                 { game.currentPlayer.tile.boardTileType === 'Property' && game.currentPlayer.tile.boardTile.player === null &&
-                  <input className="menu-button" type="button" value="Buy Property" onClick={buyProperty}/>
+                  <BuyAuctionModal buy={buyProperty} auction={auctionProperty}/>
                 }
                 { game.currentPlayer.canRoll
                   ? <input className="menu-button" type="button" value="Roll" onClick={rollDice}/>

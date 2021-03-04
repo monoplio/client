@@ -1,8 +1,11 @@
 export {
   useBuyHouseMutation, BUY_HOUSE,
   useBuyPropertyMutation, BUY_PROPERTY,
+  useCreateAuctionMutation, CREATE_AUCTION,
   useCreateGameMutation, CREATE_GAME,
+  useEndBidMutation, END_BID,
   useEndTurnMutation, END_TURN,
+  useIncreaseBidMutation, INCREASE_BID,
   useJoinGameMutation, JOIN_GAME,
   useMortgagePropertyMutation, MORTGAGE_PROPERTY,
   useRejoinGameMutation, REJOIN_GAME,
