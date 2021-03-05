@@ -23,7 +23,7 @@ function AuctionModal (props) {
     for (let i = 1; i < props.bids.length; i++) {
       max = props.bids[i].amount > max.amount ? props.bids[i] : max
     }
-    return (props.user.id !== max.id || max.amount === 0)
+    return (props.user.id !== max.player.id || max.amount === 0)
   }
 
   return (
@@ -42,7 +42,7 @@ function AuctionModal (props) {
                     {
                         (!props.bal || props.bal > props.highest)
                           ? <>
-                            <input className="menu-input-num" placeholder={`${props.highest + 1}`} min={`${props.highest + 1}`} type="number" onChange={handleInputChange} />
+                            <input className="menu-input-num" min={`${props.highest + 1}`} type="number" onChange={handleInputChange} />
                             <input className="menu-button" type="button" value="Increase Bid" onClick={() => { props.setBid(amount); props.increase() }}/>
                         </>
                           : null

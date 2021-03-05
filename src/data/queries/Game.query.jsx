@@ -6,6 +6,9 @@ const GAME = gql`
             auctions {
                 bids {
                     amount
+                    player {
+                        id
+                    }
                 }
                 id
             }
