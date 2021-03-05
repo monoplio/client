@@ -2,13 +2,16 @@
 import React, { useState } from 'react'
 import { useCreateGameMutation } from '../../data'
 import { Redirect } from 'react-router-dom'
+import { FunctionButton } from '../../components'
 
 const JoinPage = props => {
   const [formStatus, setFormStatus] = useState('initial')
   const [username, setUsername] = useState()
   const [redirect, setRedirect] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const redirectLocation = data => {
+    setLoading(false)
     props.setUser(data.createGame.owner)
     setRedirect(data.createGame.id)
   }
@@ -19,6 +22,7 @@ const JoinPage = props => {
 
   const handleCreate = () => {
     if ((username !== '' && username.length > 0)) {
+      setLoading(true)
       createGame({
         variables: {
           username: username
@@ -57,7 +61,8 @@ const JoinPage = props => {
           { formStatus === 'creating' &&
             <>
               <input className="menu-input" type="text" placeholder="Nickname (optional)" name="username" value={username} onChange={handleInputChange}/>
-              <input className="menu-button" type="button" value="Go" onClick={handleCreate}/>
+              {/* <button className="menu-button" onClick={handleCreate}>{!loading ? <span>Go</span> : <ClipLoader color={'white'} size={15}/>}</button> */}
+              <FunctionButton func={handleCreate} loading={loading} value={'Go'}/>
               <input className="menu-button" type="button" value="Back" onClick={() => setFormStatus('initial')}/>
             </>
           }
