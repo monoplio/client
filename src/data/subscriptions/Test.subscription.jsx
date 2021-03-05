@@ -7,6 +7,9 @@ const TEST = gql`
                 auctions {
                     bids {
                         amount
+                        player {
+                            id
+                        }
                     }
                     id
                 }
