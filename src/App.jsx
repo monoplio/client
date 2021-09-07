@@ -9,10 +9,10 @@ import ActionCable from 'actioncable'
 import './App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://143.198.235.198:3000/graphql' // https://floating-reef-26790.herokuapp.com/graphql https://floating-reef-26790.herokuapp.com/graphql
+  uri: 'https://api.justinchang.dev:3000/graphql' // https://floating-reef-26790.herokuapp.com/graphql https://floating-reef-26790.herokuapp.com/graphql
 })
 
-const cable = ActionCable.createConsumer('ws://143.198.235.198:3000/cable') // wss://floating-reef-26790.herokuapp.com:/cable
+const cable = ActionCable.createConsumer('wss://api.justinchang.dev:3000/cable') // wss://floating-reef-26790.herokuapp.com:/cable
 
 const splitLink = split(
   ({ query }) => {
